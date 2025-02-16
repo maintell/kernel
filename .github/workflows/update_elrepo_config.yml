@@ -59,12 +59,11 @@ jobs:
           sudo wget https://elrepo.org/linux/kernel/el9/x86_64/RPMS/kernel-ml-devel-$elrepo_c9_ver-1.el9.elrepo.x86_64.rpm
           sudo rpm2cpio kernel-ml-devel-$elrepo_c9_ver-1.el9.elrepo.x86_64.rpm | cpio -divm
           #cd /workdir/usr/src/kernels/$elrepo-1
-          ls /workdir/
-          cd /workdir/./usr/src/kernels/6.13.2-1.el9.elrepo.x86_64/
+          #ls /workdir/
+          cd ./usr/src/kernels/$elrepo-1.el9.elrepo.x86_64/
           config=/home/runner/work/kernel/kernel/config_elrepo
           elrepo_patch=/home/runner/work/kernel/kernel/elrepo_config.patch
 
-          find /workdir/ -name "*config*"
           sudo rm -rf $config
           #sudo mv config-*-1.el9.elrepo.x86_64 $config
           sudo mv .config $config
