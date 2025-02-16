@@ -42,14 +42,14 @@ jobs:
           echo "action_kernel_ver=$action_kernel_ver"
           echo "kernel_ver=$kernel_ver"
           if [[ "${action_kernel_ver}" == *"${kernel_ver}"* ]]; then
-           echo "check.status=fail" >> $GITHUB_ENV
+           echo "check_status=fail" >> $GITHUB_ENV
           else
-           echo "check.status=success" >> $GITHUB_ENV
+           echo "check_status=success" >> $GITHUB_ENV
           fi
 
       - name: Update config
         id: update
-        if: ${{ env.check.status }} == 'success'
+        if: ${{ env.check_status == 'success' }}
         working-directory: /workdir
         run: |
           sudo apt-get -qq install -y rpm2cpio 
@@ -60,7 +60,7 @@ jobs:
           sudo rpm2cpio kernel-ml-devel-$elrepo_c9_ver-1.el9.elrepo.x86_64.rpm | cpio -divm
           #cd /workdir/usr/src/kernels/$elrepo-1
           
-          cd /workdir/usr/src/kernels/$elrepo-1.el9.elrepo.x86_64/
+          cd /workdir/usr/src/kernels/$elrepo_c9_ver-1.el9.elrepo.x86_64/
           config=/home/runner/work/kernel/kernel/config_elrepo
           elrepo_patch=/home/runner/work/kernel/kernel/elrepo_config.patch
 
