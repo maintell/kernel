@@ -112,11 +112,11 @@ jobs:
           sudo sed -ri '/CONFIG_MODULE_SIG_KEY=*/c\CONFIG_MODULE_SIG_KEY=""' ${config}
           sudo sed -ri '/CONFIG_SYSTEM_TRUSTED_KEYS=*/c\CONFIG_SYSTEM_TRUSTED_KEYS=""' ${config}
           
-          echo "update.status=success" >> $GITHUB_ENV
+          echo "update_status=success" >> $GITHUB_ENV
 
       - name: Commit files
         continue-on-error: true
-        if: ${{ env.update.status }} == 'success'
+        if: ${{ env.update_status }} == 'success'
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
@@ -124,7 +124,7 @@ jobs:
 
       - name: Push changes
         continue-on-error: true
-        if: ${{ env.update.status }} == 'success'
+        if: ${{ env.update_status }} == 'success'
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.TOKEN }}
